@@ -1,0 +1,8 @@
+babel_in/
+babel_out/
+old/
+require/
+node_modules/
+build/
+dist/
+src/components/
