@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { API_URL, API_KEY, IMAGE_BASE_URL, POSTER_SIZE, BACKDROP_SIZE} from '../../config';
 import HeroImage from '../elements/HeroImage/HeroImage';
-import SearchBar from '../elements/SearchBar/SearchBar';
+import Header from '../elements/Header/Header';
 import FourColGrid from '../elements/FourColGrid/FourColGrid';
 import MovieThumb from '../elements/MovieThumb/MovieThumb';
 import LoadMoreBtn from '../elements/LoadMoreBtn/LoadMoreBtn';
@@ -80,6 +80,8 @@ class Home extends Component {
 
   render() {
     return (
+      <div>
+      <Header callback={this.searchItems} />
       <div className="rmdb-home">
       {this.state.heroImage ?
         <div>
@@ -88,7 +90,6 @@ class Home extends Component {
             title={this.state.heroImage.original_title}
             text={this.state.heroImage.overview}
           />
-          <SearchBar callback={this.searchItems} />
         </div> : null }
         <div className="rmdb-home-grid">
           <FourColGrid
@@ -111,6 +112,8 @@ class Home extends Component {
             : null }
         </div>
       </div>
+      </div>
+
     )
   }
 }

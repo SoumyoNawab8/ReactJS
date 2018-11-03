@@ -8,6 +8,14 @@
   color: #fff;
 }
 
+input#name{
+  color:white;
+}
+
+.MuiInput-underline-90:before{
+  border-bottom:1px solid white !important;
+}
+
 .rmdb-searchbar-content {
   max-width: 1280px;
   width: 100%;
