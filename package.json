@@ -4,17 +4,12 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.3.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-fontawesome": "^1.6.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.0.1"
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+   
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node index.js"
   },
   "browserslist": {
     "production": [
