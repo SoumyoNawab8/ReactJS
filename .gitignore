@@ -3,5 +3,4 @@ babel_out/
 old/
 require/
 node_modules/
-build/
 dist/
