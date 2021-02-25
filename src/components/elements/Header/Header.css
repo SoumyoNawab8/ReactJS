@@ -1,3 +1,9 @@
+header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-headStyle-3.MuiPaper-elevation4{
+  /* position:fixed; */
+  top:0;
+  /* background-color:#7024dd; */
+}
+
 .rmdb-header {
   width: 100%;
   height: auto;

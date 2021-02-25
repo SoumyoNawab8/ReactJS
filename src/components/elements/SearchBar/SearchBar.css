@@ -11,6 +11,9 @@
 input#name{
   color:white;
 }
+button.MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-popupIndicator {
+  display: none;
+}
 
 .MuiInput-underline-90:before{
   border-bottom:1px solid white !important;

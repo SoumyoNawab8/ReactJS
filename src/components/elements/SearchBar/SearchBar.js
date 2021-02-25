@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
+import {withRouter} from 'react-router-dom';
 import './SearchBar.css'
 import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
-
+import {debounce} from 'lodash'
+// import parse from 'autosuggest-highlight/parse';
+// import match from 'autosuggest-highlight/match';
 
 const styles = theme => ({
   container: {
@@ -19,38 +22,77 @@ const styles = theme => ({
     width: 200,
   },
 });
-
 class SearchBar extends Component{
   constructor(props) {
       super(props);
-      this.state = {name: ''};
+      this.state = {
+        name: '',
+        options:[],
+      };
       this.handleChange=this.handleChange.bind(this)
     }
 
-    handleChange(event){
-      this.setState({name:event.target.value})
+  handleChange(event, newValue) {
+    if (newValue && newValue.title) {
+      this.setState({ name: newValue.title }, () => { this.props.history.push("/" + newValue.id); })
     }
+  }
 
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.searchedmovies) {
+      return {
+        options: nextProps.searchedmovies
+      }
+    }
+  }
   render(){
     const { classes } = this.props;
     return(
       <div>
-      <form className={classes.container} noValidate autoComplete="off">
-      <TextField
+      <Autocomplete
+      id="custom-input-demo"
+      options={this.state.options}
+      getOptionLabel={(option) => option.title}
+      renderOption={(option, { inputValue }) => {
+        return (
+          <div>
+              <span>
+                {option.title+" - "+option.release_date}
+              </span>
+          </div>
+        );
+      }}
+      onInputChange={(event, newInputValue) => {
+        if(newInputValue.length>0){
+          this.setState({name:newInputValue})
+          debounce(() => this.props.callback(newInputValue), 2000)()
+        }
+        else{
+          this.setState({options:[]})
+        }
+      }}
+      inputValue={this.state.name}
+
+      value={this.state.name}
+        onChange={this.handleChange}
+      renderInput={(params) => (
+        <div ref={params.InputProps.ref}>
+          <TextField
+          {...params}
         id="name"
         className={classes.textField}
         placeholder={'Search'}
-        value={this.state.name}
-        onChange={this.handleChange}
         margin="normal"
       />
-    </form>
+        </div>
+      )}
+    />
       </div>
     )
   }
 }
 
-export default withStyles(styles)(SearchBar);
+export default withStyles(styles)(withRouter(SearchBar));
 
 
 // class SearchBar extends Component {

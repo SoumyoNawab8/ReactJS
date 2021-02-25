@@ -15,7 +15,8 @@ class Home extends Component {
     loading: false,
     currentPage: 0,
     totalPages: 0,
-    searchTerm: ''
+    searchTerm: '',
+    searchedMovies:[],
   }
 
   componentDidMount() {
@@ -30,22 +31,25 @@ class Home extends Component {
   }
 
   searchItems = (searchTerm) => {
-    console.log(searchTerm);
     let endpoint = '';
     this.setState({
-      movies: [],
-      loading: true,
-      searchTerm
+      searchTerm,
+      searchedMovies: []
     })
-
-    if (searchTerm === '') {
-      endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-    } else {
       endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}`;
-    }
-    this.fetchItems(endpoint);
+
+      fetch(endpoint)
+        .then(result => result.json())
+        .then(result => {
+          this.setState({
+            searchedMovies: [...result.results]
+          })
+        })
+        .catch(error => console.error('Error:', error))
 
   }
+
+
 
   loadMoreItems = () => {
     let endpoint = '';
@@ -81,7 +85,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-      <Header callback={this.searchItems} />
+      <Header callback={(value)=>this.searchItems(value)}  searchedmovies={this.state.searchedMovies} />
       <div className="rmdb-home">
       {this.state.heroImage ?
         <div>

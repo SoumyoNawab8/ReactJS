@@ -22,7 +22,7 @@ const styles = {
     flex: 1,
   },
   headStyle: {
-    backgroundColor: 'black',
+    backgroundColor: '#7024dd',
   },
 };
 
@@ -31,30 +31,16 @@ class Header extends Component {
     const {
       classes
     } = this.props;
-    return ( <
-      div className = {
-        classes.root
-      } >
-      <
-      AppBar position = "static"
-      className = {
-        classes.headStyle
-      } >
-      <
-      Toolbar >
-      <
-      Typography variant = "title"
-      color = "inherit"
-      className = {
-        classes.flex
-      } >
-      BoxOffice <
-      /Typography> <
-      SearchBar / >
-      <
-      /Toolbar> <
-      /AppBar> <
-      /div>
+    return (<div className={classes.root} >
+      <AppBar position="fixed"
+        className={classes.headStyle} >
+        <Toolbar>
+          <Typography variant="title"
+            color="inherit"
+            className={classes.flex}>
+            MOVIE APP </Typography> <SearchBar callback={(value)=>this.props.callback(value)} searchedmovies={this.props.searchedmovies}
+            searchLoading={this.props.searchLoading} />
+        </Toolbar> </AppBar> </div>
     );
   }
 

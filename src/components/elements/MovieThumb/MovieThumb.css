@@ -6,6 +6,22 @@
   transition: all 0.3s;
   box-sizing: border-box;
 }
+.rmdb-grid-element:hover{
+  box-shadow: 1px 1px 9px 0px #a7b1e6;
+  transition: ease-in-out 0.2s;
+}
+.favouriteAddBtn{
+  position: sticky;
+  cursor: pointer;
+  font-size:20px;
+  padding:7px;
+  color:white;
+  justify-content: center;
+    bottom: 0px;
+    display: flex;
+    width: 20px;
+}
+
 
 .clickable {
   cursor: pointer;
