@@ -5,8 +5,8 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
 import {debounce} from 'lodash'
-// import parse from 'autosuggest-highlight/parse';
-// import match from 'autosuggest-highlight/match';
+import { Link } from 'react-router-dom';
+
 
 const styles = theme => ({
   container: {
@@ -36,6 +36,9 @@ class SearchBar extends Component{
     if (newValue && newValue.title) {
       this.setState({ name: newValue.title }, () => { this.props.history.push("/" + newValue.id); })
     }
+    else{
+      this.setState({ name: "" });
+    }
   }
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -52,13 +55,13 @@ class SearchBar extends Component{
       <Autocomplete
       id="custom-input-demo"
       options={this.state.options}
-      getOptionLabel={(option) => option.title}
+      getOptionLabel={(option) => option.title?option.title:""}
       renderOption={(option, { inputValue }) => {
         return (
           <div>
-              <span>
-                {option.title+" - "+option.release_date}
-              </span>
+            <Link className="searchedItem" to={{ pathname: `/${option.id}`, movieName: `${option.original_title}` }}>
+              {option.title+" - "+option.release_date}
+           </Link>
           </div>
         );
       }}

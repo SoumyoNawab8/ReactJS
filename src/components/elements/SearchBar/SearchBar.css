@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+a.searchedItem{
+  color:black;
+  text-decoration-line: none !important;
+}
 input#name{
   color:white;
 }
