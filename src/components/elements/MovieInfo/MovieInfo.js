@@ -1,10 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { IMAGE_BASE_URL, POSTER_SIZE, BACKDROP_SIZE } from '../../../config';
 import FontAwesome from 'react-fontawesome';
 import MovieThumb from '../MovieThumb/MovieThumb';
 import './MovieInfo.css';
+import { connect } from 'react-redux';
 
 const MovieInfo = (props) => {
+  useEffect(()=>{
+    props.getFavourites();
+  },[])
+
   return (
     <div className="rmdb-movieinfo"
       style={{
@@ -14,6 +19,8 @@ const MovieInfo = (props) => {
       <div className="rmdb-movieinfo-content">
         <div className="rmdb-movieinfo-thumb">
           <MovieThumb
+            toggleFavourite={()=>props.updateFavourites(props.movie)}
+             isFavourite={props.favouriteReducer.favourites && props.favouriteReducer.favourites.findIndex(x=>x.id===props.movie.id)===-1}
             image={props.movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${props.movie.poster_path}` : './images/no_image.jpg'}
             clickable={false}
           />
@@ -38,4 +45,17 @@ const MovieInfo = (props) => {
   )
 }
 
-export default MovieInfo;
+
+
+const mapStateToProps = (state) => {
+  return { favouriteReducer: state.favouriteReducer }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFavourites: () => { dispatch({ type: 'loadFavourite' }) },
+    updateFavourites: (data) => { dispatch({ type: 'updateFavourite', payload: data }) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieInfo);

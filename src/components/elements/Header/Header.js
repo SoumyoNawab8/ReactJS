@@ -13,7 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchBar from '../SearchBar/SearchBar';
 import Typography from '@material-ui/core/Typography';
-
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 const styles = {
   root: {
     flexGrow: 1,
@@ -38,7 +38,11 @@ class Header extends Component {
           <Typography variant="title"
             color="inherit"
             className={classes.flex}>
-            MOVIE APP </Typography> <SearchBar callback={(value)=>this.props.callback(value)} searchedmovies={this.props.searchedmovies}
+            MOVIE APP </Typography> 
+            
+            <Link className="navLink" to={{ pathname: `/favourites` }} title="Favourites"><FavoriteOutlinedIcon /></Link>
+
+            <SearchBar callback={(value) => this.props.callback(value)} searchedmovies={this.props.searchedmovies}
             searchLoading={this.props.searchLoading} />
         </Toolbar> </AppBar> </div>
     );

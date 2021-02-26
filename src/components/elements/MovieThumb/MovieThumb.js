@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MovieThumb.css';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
 const MovieThumb = (props) => {
   return (
@@ -14,7 +15,7 @@ const MovieThumb = (props) => {
         :
         <img src={props.image} alt="moviethumb" />
       }
-      <span className="favouriteAddBtn"><FavoriteBorderOutlinedIcon /></span>
+      <span onClick={props.toggleFavourite} className="favouriteAddBtn">{props.isFavourite ?<FavoriteBorderOutlinedIcon />:<FavoriteOutlinedIcon />}</span>
     </div>
   )
 }

@@ -1,9 +1,12 @@
 header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-headStyle-3.MuiPaper-elevation4{
-  /* position:fixed; */
   top:0;
-  /* background-color:#7024dd; */
 }
-
+a.navLink {
+  color: white;
+  text-decoration-line: none;
+  font-size:19px;
+  margin-right:10px;
+}
 .rmdb-header {
   width: 100%;
   height: auto;
